@@ -5,6 +5,14 @@ package com.chandebois.domain;
  */
 public class Treasure {
 
+    public Treasure() {
+    }
+
+    public Treasure(Position position, int value) {
+        this.position = position;
+        this.value = value;
+    }
+
     private Position position;
     private int value;
 
@@ -12,15 +20,7 @@ public class Treasure {
         return position;
     }
 
-    public void setPosition(Position position) {
-        this.position = position;
-    }
-
     public int getValue() {
         return value;
-    }
-
-    public void setValue(int value) {
-        this.value = value;
     }
 }

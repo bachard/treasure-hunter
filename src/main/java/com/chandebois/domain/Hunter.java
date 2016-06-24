@@ -27,6 +27,7 @@ public class Hunter {
 
     public void forward() {
         this.position = orientation.forward(this.position);
+        //implements notifier for hunter position
     }
 
     public void turnLeft() {
@@ -35,6 +36,10 @@ public class Hunter {
 
     public void turnRight() {
         this.orientation = this.orientation.turnRight();
+    }
+
+    public int getAmountOfTreasuresCollected() {
+        return this.getTreasures().size();
     }
 
     public Position getPosition() {
