@@ -16,12 +16,14 @@ public class HunterUnitTest {
     private Hunter hunter;
     private Position position;
     private Orientation orientation;
+    private TreasureMap treasureMap;
 
     @Before
     public void setUp() throws Exception {
         position = new Position();
         orientation = new OrientationNorth();
-        hunter = new Hunter(position, orientation);
+        treasureMap = new TreasureMap(6, 5);
+        hunter = new Hunter(position, orientation, treasureMap);
     }
 
     @Test
@@ -47,7 +49,6 @@ public class HunterUnitTest {
         hunter.addTreasure(new Treasure());
         Assertions.assertThat(hunter.getTreasures().size()).isEqualTo(1);
     }
-
 
 
 }

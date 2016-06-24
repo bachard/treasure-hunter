@@ -20,7 +20,7 @@ public class OrientationNorthUnitTest {
     @Test
     public void should_forward_of_1_on_x_axis() throws Exception {
         //Given
-        Position position = new Position();
+        Position position = new Position(2, 2);
         //When
         Position nextPosition = orientation.forward(position);
         //Then

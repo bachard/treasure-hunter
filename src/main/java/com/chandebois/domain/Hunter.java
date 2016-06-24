@@ -12,11 +12,13 @@ public class Hunter {
 
     private Position position;
     private Orientation orientation;
+    private TreasureMap treasureMap;
     private List<Treasure> treasures;
 
-    public Hunter(Position position, Orientation orientation) {
+    public Hunter(Position position, Orientation orientation, TreasureMap treasureMap) {
         this.position = position;
         this.orientation = orientation;
+        this.treasureMap = treasureMap;
         treasures = new ArrayList<>();
     }
 
@@ -26,8 +28,15 @@ public class Hunter {
     }
 
     public void forward() {
-        this.position = orientation.forward(this.position);
-        //implements notifier for hunter position
+        Position nextPosition = orientation.forward(this.position);
+        if(treasureMap.isInsideMap(nextPosition) && !treasureMap.isCellContainsMoutain(nextPosition)){
+            this.position = nextPosition;
+            //implements notifier for hunter position
+            if(treasureMap.isCellContainsTreasure(this.position)){
+                treasures.add(treasureMap.collectTreasure(this.position));
+            }
+        }
+
     }
 
     public void turnLeft() {

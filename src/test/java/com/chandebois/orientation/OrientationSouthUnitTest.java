@@ -24,7 +24,7 @@ public class OrientationSouthUnitTest {
         //When
         Position nextPosition = orientation.forward(position);
         //Then
-        Assertions.assertThat(nextPosition.getCoordY()).isEqualTo(-1);
+        Assertions.assertThat(nextPosition.getCoordY()).isEqualTo(2);
     }
 
     @Test

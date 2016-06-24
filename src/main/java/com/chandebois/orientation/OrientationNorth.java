@@ -10,7 +10,7 @@ public class OrientationNorth implements Orientation{
     public Position forward(final Position position) {
         Position nextPosition = new Position();
         nextPosition.setCoordX(position.getCoordX());
-        nextPosition.setCoordY(position.getCoordY() + 1);
+        nextPosition.setCoordY(position.getCoordY() - 1);
         return nextPosition;
     }
 
