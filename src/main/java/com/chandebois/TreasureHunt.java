@@ -1,6 +1,7 @@
 package com.chandebois;
 
 import com.chandebois.builder.TreasureHunterBuilder;
+import com.chandebois.io.ResultWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.ResourceUtils;
 
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.concurrent.*;
 
@@ -21,13 +24,16 @@ import java.util.concurrent.*;
 public class TreasureHunt {
 
     @Autowired
-    TreasureHunterBuilder treasureHunterBuilder;
+    private TreasureHunterBuilder treasureHunterBuilder;
+
+    @Autowired
+    private ResultWriter resultWriter;
 
     public static void main(String[] args) throws Exception {
         SpringApplication.run(TreasureHunt.class, args);
     }
 
-    public void execute() throws FileNotFoundException, InterruptedException, ExecutionException {
+    public void execute() throws FileNotFoundException, InterruptedException, ExecutionException, UnsupportedEncodingException {
         List<TreasureHunter> treasureHunters = treasureHunterBuilder.build(ResourceUtils.getFile("classpath:treasure-map.txt").getAbsolutePath(), ResourceUtils.getFile("classpath:hunter.txt").getAbsolutePath());
 
         ScheduledExecutorService executor = Executors.newScheduledThreadPool(treasureHunters.size());
@@ -40,5 +46,12 @@ public class TreasureHunt {
 
         countDownLatch.await();
         executor.shutdown();
+
+        //write file
+        resultWriter.openWriter("test.txt");
+        for (TreasureHunter treasureHunter : treasureHunters) {
+            resultWriter.write(treasureHunter.getHunter());
+        }
+        resultWriter.close();
     }
 }

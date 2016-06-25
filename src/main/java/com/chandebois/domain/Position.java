@@ -49,4 +49,15 @@ public class Position {
         }
         return isEquals;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("X Coordinate : ");
+        sb.append(this.getCoordX());
+        sb.append(", ");
+        sb.append("Y Coordinate : ");
+        sb.append(this.getCoordY());
+        return sb.toString();
+    }
 }
