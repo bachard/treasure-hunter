@@ -40,14 +40,14 @@ public class TreasureMapUnitTest {
     @Test
     public void should_return_true_when_inside_the_map() throws Exception {
         Position position = new Position(1, 1);
-        boolean isInsideMap = treasureMap.isInsideMap(position);
+        boolean isInsideMap = treasureMap.isPositionInsideMap(position);
         Assertions.assertThat(isInsideMap).isTrue();
     }
 
     @Test
     public void should_return_false_when_outside_the_map() throws Exception {
         Position position = new Position(7, 5);
-        boolean isInsideMap = treasureMap.isInsideMap(position);
+        boolean isInsideMap = treasureMap.isPositionInsideMap(position);
         Assertions.assertThat(isInsideMap).isFalse();
     }
 

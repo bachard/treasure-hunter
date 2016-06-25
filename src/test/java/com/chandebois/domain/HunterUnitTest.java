@@ -23,7 +23,9 @@ public class HunterUnitTest {
         position = new Position();
         orientation = new OrientationNorth();
         treasureMap = new TreasureMap(6, 5);
-        hunter = new Hunter(position, orientation, treasureMap);
+        hunter = new Hunter
+                    .HunterBuilder(position, orientation, treasureMap)
+                    .build();
     }
 
     @Test

@@ -29,12 +29,12 @@ public class TreasureMap {
         this.mountains.add(moutain);
     }
 
-    public boolean isInsideMap(final Position position) {
+    public boolean isPositionInsideMap(final Position position) {
         return IntStream.rangeClosed(1, this.width).anyMatch(c -> c == position.getCoordX())
                 && IntStream.rangeClosed(1, this.height).anyMatch(c -> c == position.getCoordY());
     }
 
-    public boolean isCellContainsMoutain(final Position position) {
+    public boolean isPositionContainsMoutain(final Position position) {
         for (Mountain mountain : mountains) {
             if (mountain.getPosition().equals(position)) {
                 return true;
@@ -43,7 +43,7 @@ public class TreasureMap {
         return false;
     }
 
-    public boolean isCellContainsTreasure(final Position position) {
+    public boolean isPositionContainsTreasure(final Position position) {
         for (Treasure treasure : treasures) {
             if (treasure.getPosition().equals(position)) {
                 return true;
@@ -59,12 +59,8 @@ public class TreasureMap {
                 treasureToCollect = (Treasure) treasure.clone();
             }
         }
-        removeTreasure(treasureToCollect);
+        this.treasures.remove(treasureToCollect);
         return treasureToCollect;
-    }
-
-    private void removeTreasure(final Treasure treasure) {
-        this.treasures.remove(treasure);
     }
 
     public int getWidth() {

@@ -9,9 +9,9 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @EnableAutoConfiguration
-public class TreasureHunterRunner {
+public class TreasureHunt {
 
     public static void main(String[] args) throws Exception {
-        SpringApplication.run(TreasureHunterRunner.class, args);
+        SpringApplication.run(TreasureHunt.class, args);
     }
 }

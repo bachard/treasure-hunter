@@ -25,7 +25,9 @@ public class HunterAccTest {
 
         Position hunterPosition = new Position(1,1);
         Orientation hunterOrientation = new OrientationEast();
-        hunter = new Hunter(hunterPosition, hunterOrientation, treasureMap);
+        hunter = new Hunter
+                    .HunterBuilder(hunterPosition, hunterOrientation, treasureMap)
+                    .build();
     }
 
     @Test
@@ -36,7 +38,7 @@ public class HunterAccTest {
     }
 
     @Test
-    public void should_collect_a_treasure() throws Exception {
+    public void should_forward_and_collect_a_treasure() throws Exception {
         hunter.forward();
         hunter.turnRight();
         hunter.forward();
