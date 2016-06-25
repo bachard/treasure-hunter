@@ -78,6 +78,10 @@ public class Hunter {
         return this.getTreasures().size();
     }
 
+    public String getName() {
+        return name;
+    }
+
     public Position getPosition() {
         return position;
     }

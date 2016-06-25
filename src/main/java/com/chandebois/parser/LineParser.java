@@ -2,12 +2,16 @@ package com.chandebois.parser;
 
 import com.chandebois.command.Command;
 import com.chandebois.command.CommandFactory;
-import com.chandebois.domain.*;
+import com.chandebois.domain.Mountain;
+import com.chandebois.domain.Position;
+import com.chandebois.domain.Treasure;
+import com.chandebois.domain.TreasureMap;
+import com.chandebois.io.model.HunterReaderModel;
 import com.chandebois.orientation.Orientation;
 import com.chandebois.orientation.OrientationFactory;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * Created by nonok on 25/06/2016.
@@ -35,7 +39,7 @@ public class LineParser {
         return new Treasure(position, value);
     }
 
-    public static Hunter parseHunter(final String line, final TreasureMap treasureMap) {
+    public static HunterReaderModel parseHunter(final String line) {
         String[] tabLines = line.split(" ");
         final String hunterName = tabLines[0];
 
@@ -45,21 +49,19 @@ public class LineParser {
 
         final Orientation orientation = OrientationFactory.getOrientation(tabLines[2].charAt(0));
 
-        Hunter hunter = new Hunter
-                .HunterBuilder(position, orientation, treasureMap)
-                .name(hunterName)
-                .build();
-        return hunter;
-    }
-
-    public static List<Command> parseCommands(final String line) {
-        List<Command> commands = new ArrayList<>();
-        String[] tabLines = line.split(" ");
+        Queue<Command> commands = new LinkedList<>();
         tabLines[3].chars()
                 .mapToObj(c -> (char) c)
                 .forEach(codeCommand -> {
                     commands.add(CommandFactory.getCommand(codeCommand));
                 });
-        return commands;
+
+        HunterReaderModel hunterReaderModel = new HunterReaderModel();
+        hunterReaderModel.setName(hunterName);
+        hunterReaderModel.setPosition(position);
+        hunterReaderModel.setOrientation(orientation);
+        hunterReaderModel.setCommands(commands);
+
+        return hunterReaderModel;
     }
 }
