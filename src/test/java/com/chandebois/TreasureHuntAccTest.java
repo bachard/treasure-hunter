@@ -5,6 +5,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.util.ResourceUtils;
 
 /**
  * Created by nonok on 25/06/2016.
@@ -18,6 +19,6 @@ public class TreasureHuntAccTest {
 
     @Test
     public void name() throws Exception {
-        treasureHunt.execute();
+        treasureHunt.execute(ResourceUtils.getFile("classpath:treasure-map.txt").getAbsolutePath(), ResourceUtils.getFile("classpath:hunter.txt").getAbsolutePath(), "test.txt");
     }
 }

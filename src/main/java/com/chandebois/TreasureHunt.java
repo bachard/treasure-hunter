@@ -7,13 +7,14 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
-import org.springframework.util.ResourceUtils;
 
 import java.io.FileNotFoundException;
-import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
-import java.util.concurrent.*;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by nonok on 22/06/2016.
@@ -33,22 +34,27 @@ public class TreasureHunt {
         SpringApplication.run(TreasureHunt.class, args);
     }
 
-    public void execute() throws FileNotFoundException, InterruptedException, ExecutionException, UnsupportedEncodingException {
-        List<TreasureHunter> treasureHunters = treasureHunterBuilder.build(ResourceUtils.getFile("classpath:treasure-map.txt").getAbsolutePath(), ResourceUtils.getFile("classpath:hunter.txt").getAbsolutePath());
+    public void execute(String treasureMapFilename, String treasureHunterFilename, String resultFileName) throws Exception {
+        List<TreasureHunter> treasureHunters = treasureHunterBuilder.build(treasureMapFilename, treasureHunterFilename);
 
+        executeTreasureHunterTask(treasureHunters);
+
+        writeResultFile(resultFileName, treasureHunters);
+    }
+
+    private void executeTreasureHunterTask(List<TreasureHunter> treasureHunters) throws InterruptedException {
         ScheduledExecutorService executor = Executors.newScheduledThreadPool(treasureHunters.size());
-
         CountDownLatch countDownLatch = new CountDownLatch(treasureHunters.size());
         for (TreasureHunter treasureHunter : treasureHunters) {
             TreasureHunterTask treasureHunterTask = new TreasureHunterTask(treasureHunter, countDownLatch);
             executor.scheduleAtFixedRate(treasureHunterTask, 0, 1, TimeUnit.SECONDS);
         }
-
         countDownLatch.await();
         executor.shutdown();
+    }
 
-        //write file
-        resultWriter.openWriter("test.txt");
+    private void writeResultFile(String resultFileName, List<TreasureHunter> treasureHunters) throws FileNotFoundException, UnsupportedEncodingException {
+        resultWriter.openWriter(resultFileName);
         for (TreasureHunter treasureHunter : treasureHunters) {
             resultWriter.write(treasureHunter.getHunter());
         }

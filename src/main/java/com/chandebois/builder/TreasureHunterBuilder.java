@@ -29,13 +29,13 @@ public class TreasureHunterBuilder {
     @Qualifier("treasureMapReader")
     private TreasureMapReader treasureMapReader;
 
-    public List<TreasureHunter> build(String treasureMapFile, String treasureHunterFile) {
+    public List<TreasureHunter> build(String treasureMapFileName, String treasureHunterFileName) {
 
         List<TreasureHunter> treasureHunters = new ArrayList<>();
 
         try {
-            TreasureMap treasureMap = treasureMapReader.read(new File(treasureMapFile));
-            List<HunterReaderModel> hunterReaderModels = hunterReader.read(new File(treasureHunterFile));
+            TreasureMap treasureMap = treasureMapReader.read(new File(treasureMapFileName));
+            List<HunterReaderModel> hunterReaderModels = hunterReader.read(new File(treasureHunterFileName));
             hunterReaderModels.forEach(hrm -> {
                 TreasureHunter treasureHunter = new TreasureHunter();
                 Hunter hunter = new Hunter.HunterBuilder(hrm.getPosition(), hrm.getOrientation(), treasureMap)
