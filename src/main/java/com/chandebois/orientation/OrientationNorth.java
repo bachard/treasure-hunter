@@ -5,7 +5,7 @@ import com.chandebois.domain.Position;
 /**
  * Created by nonok on 22/06/2016.
  */
-public class OrientationNorth implements Orientation{
+public class OrientationNorth implements Orientation {
     @Override
     public Position forward(final Position position) {
         Position nextPosition = new Position();
@@ -22,5 +22,10 @@ public class OrientationNorth implements Orientation{
     @Override
     public Orientation turnRight() {
         return new OrientationEast();
+    }
+
+    @Override
+    public String toString() {
+        return "North orientation";
     }
 }

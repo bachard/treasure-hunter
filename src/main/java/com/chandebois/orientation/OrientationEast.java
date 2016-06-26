@@ -24,4 +24,9 @@ public class OrientationEast implements Orientation {
     public Orientation turnRight() {
         return new OrientationSouth();
     }
+
+    @Override
+    public String toString() {
+        return "East orientation";
+    }
 }
