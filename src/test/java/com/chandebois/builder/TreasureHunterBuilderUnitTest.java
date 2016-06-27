@@ -1,7 +1,7 @@
 package com.chandebois.builder;
 
 import com.chandebois.TreasureHunt;
-import com.chandebois.TreasureHunter;
+import com.chandebois.task.TreasureHunter;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;

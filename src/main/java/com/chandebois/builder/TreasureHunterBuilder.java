@@ -1,6 +1,6 @@
 package com.chandebois.builder;
 
-import com.chandebois.TreasureHunter;
+import com.chandebois.task.TreasureHunter;
 import com.chandebois.domain.Hunter;
 import com.chandebois.domain.TreasureMap;
 import com.chandebois.io.HunterReader;

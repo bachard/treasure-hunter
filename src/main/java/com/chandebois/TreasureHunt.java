@@ -2,6 +2,8 @@ package com.chandebois;
 
 import com.chandebois.builder.TreasureHunterBuilder;
 import com.chandebois.io.ResultWriter;
+import com.chandebois.task.TreasureHunter;
+import com.chandebois.task.TreasureHunterTask;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;

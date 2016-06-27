@@ -1,4 +1,4 @@
-package com.chandebois;
+package com.chandebois.task;
 
 import com.chandebois.command.Command;
 
