@@ -7,3 +7,6 @@ Here is the points to end this :
 - manage constant in the whole application
 - manage business and technical exception
 - manage log
+
+
+END
